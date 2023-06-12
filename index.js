@@ -1,6 +1,7 @@
 const express = require("express");
 const cors = require("cors");
 const app = express();
+const jwt = require("jsonwebtoken");
 const { MongoClient, ServerApiVersion, ObjectId } = require("mongodb");
 const port = process.env.PORT || 5000;
 require("dotenv").config();
@@ -70,7 +71,7 @@ async function run() {
     app.patch("/bookings/:id", async (req, res) => {
       const id = req.params.id;
       const booking = req.body;
-      console.log(booking);
+
       const filter = { _id: new ObjectId(id) };
 
       const updatedBooking = {
